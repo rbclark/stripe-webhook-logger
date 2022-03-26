@@ -1,7 +1,7 @@
 require 'json'
 require 'byebug'
 
-KEYWORDS = [ "price", "prod", "li", "il", "ii", "acct", "test", "ch", "cus", "in", "evt", "card", "req", "pi", "pm", "secret", "src" ]
+KEYWORDS = [ "price", "prod", "li", "il", "ii", "acct", "test", "ch", "cus", "in", "evt", "card", "req", "pi", "pm", "secret", "src", "txn", "dp", "sub_sched", "si", "plan" ]
 
 MATCH_REGEX = /(#{KEYWORDS.join('|')})_\w{12,96}/
 
