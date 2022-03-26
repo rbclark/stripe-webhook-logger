@@ -1,9 +1,7 @@
 require 'json'
 require 'byebug'
 
-KEYWORDS = [ "price", "prod", "li", "il", "ii", "acct", "test", "ch", "cus", "in", "evt", "card", "req", "pi", "pm", "secret", "src", "txn", "dp", "sub_sched", "si", "plan" ]
-
-MATCH_REGEX = /(#{KEYWORDS.join('|')})_\w{12,96}/
+MATCH_REGEX = /\w+_[A-Za-z\d]{12,96}/
 
 REPLACE_LIST = {
   account_name: 'Example Company, Inc.',
@@ -19,7 +17,7 @@ class Sanitizer
   def self.sanitize(key, str)
     if REPLACE_LIST.key?(key.to_sym)
       return REPLACE_LIST[key.to_sym]
-    elsif str =~ MATCH_REGEX
+    elsif str =~ MATCH_REGEX && !str.eql?(str.downcase)
       return str.split('/').map do |section|
         if section.include?('_')
           str_arr = section.split('_')
