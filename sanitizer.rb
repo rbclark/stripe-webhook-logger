@@ -17,12 +17,12 @@ class Sanitizer
   def self.sanitize(key, str)
     if REPLACE_LIST.key?(key.to_sym)
       return REPLACE_LIST[key.to_sym]
-    elsif str =~ MATCH_REGEX && !str.eql?(str.downcase)
+    elsif str =~ MATCH_REGEX
       return str.split('/').map do |section|
         if section.include?('_')
           str_arr = section.split('_')
           str_arr.each_with_index do |str, idx|
-            str_arr[idx] = '0' * str_arr[idx].length unless KEYWORDS.include?(str)
+            str_arr[idx] = '0' * str_arr[idx].length unless str.eql?(str.downcase)
           end
           str_arr.join('_')
         else
